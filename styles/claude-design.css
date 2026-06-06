@@ -1,0 +1,888 @@
+/* ════════════════════════════════════════════════════════════════════════
+   Atelier archetype — Sesta Laioles reference
+   Fresh CSS, NO Editorial heritage. Sesta's anatomy is too different from
+   Editorial's to inherit cleanly; better to start clean and stay focused.
+
+   Type system:
+     Body / nav / buttons → Inter (sans)
+     Display headlines    → Cormorant Garamond, italic for most lines
+                            with roman swaps for short labels ("Terroir Line").
+   Palette: single warm cream surface, near-black ink, no real accent.
+   Photography does the color work.
+   ════════════════════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body { overflow-x: clip; }
+
+img, video { display: block; max-width: 100%; }
+button { background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 0; }
+a { color: inherit; text-decoration: none; }
+input, textarea { font: inherit; color: inherit; }
+
+::selection { background: var(--color-bg-dark); color: var(--color-bg); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Shared utilities
+   ───────────────────────────────────────────────────────────────────────── */
+
+.sesta-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+.sesta-eyebrow--muted { color: var(--color-text-muted); }
+
+/* Pill button — outline, paper background, fills on hover */
+.sesta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sesta-btn:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   NAVBAR — minimal top bar
+   Logo wordmark left · centered nav links · lang switcher + cart icons right
+   Transparent over hero; flips to cream w/ thin rule on scroll
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px clamp(20px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 32px;
+  color: #FFFFFF;
+  /* Inverts the navbar against whatever frame is currently painted on the
+     canvas hero — same trick Kettmeir uses on .header. */
+  mix-blend-mode: difference;
+  transition: padding 0.35s ease;
+}
+.sesta-nav.is-scrolled {
+  mix-blend-mode: normal;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding: 14px clamp(20px, 4vw, 56px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sesta-nav__brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+  justify-self: start;
+}
+.sesta-nav__brand .mark {
+  display: inline-block;
+  width: 22px; height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.sesta-nav__links {
+  display: inline-flex;
+  gap: 28px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+}
+.sesta-nav__link {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+.sesta-nav__link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 5px; }
+
+.sesta-nav__right {
+  display: inline-flex;
+  gap: 18px;
+  align-items: center;
+  justify-self: end;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.sesta-nav__lang { display: inline-flex; gap: 4px; }
+.sesta-nav__lang .is-active { opacity: 1; }
+.sesta-nav__lang .sep { opacity: 0.35; }
+.sesta-nav__lang span:not(.is-active):not(.sep) { opacity: 0.6; }
+.sesta-nav__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+}
+.sesta-nav__toggle {
+  display: none;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: inherit;
+  border: 1px solid currentColor;
+  padding: 6px 11px;
+  border-radius: 999px;
+}
+
+@media (max-width: 900px) {
+  .sesta-nav { grid-template-columns: auto auto; }
+  .sesta-nav__links { display: none; }
+  .sesta-nav__right { gap: 12px; }
+  .sesta-nav__toggle { display: inline-flex; }
+}
+
+/* Mobile menu sheet */
+.sesta-mobile-sheet {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 92px 24px 36px;
+  border-bottom: 1px solid var(--color-border);
+  transform: translateY(-110%);
+  transition: transform 0.45s var(--ease-out-expo);
+  display: none;
+}
+.sesta-mobile-sheet.is-open { transform: translateY(0); }
+.sesta-mobile-sheet ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.sesta-mobile-sheet a {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 30px;
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 900px) { .sesta-mobile-sheet { display: block; } }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   HERO — full-bleed photo + italic display bottom-left + scroll cue
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  color: var(--color-on-photo);
+}
+.sesta-hero__bg {
+  position: absolute;
+  /* extra room top + bottom so the parallax yPercent translation never
+     reveals an empty edge on the section */
+  top: -12%; left: 0; right: 0; bottom: -12%;
+  z-index: 1;
+}
+.sesta-hero__bg img { object-fit: cover; }
+.sesta-hero__veil {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.7) 100%);
+}
+.sesta-hero__inner {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(28px, 5vw, 80px) clamp(48px, 8vh, 120px);
+}
+.sesta-hero__headline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--color-on-photo);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
+  margin: 0 0 32px;
+  max-width: 14ch;
+}
+.sesta-hero__scroll {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: var(--color-on-photo);
+  font-size: 16px;
+  background: transparent;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sesta-hero__scroll:hover { background: var(--color-on-photo); color: var(--color-text); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FINCA INTRO — eyebrow + display + 2-col body + button + photo pair
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-finca {
+  background: var(--color-bg);
+  padding: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 80px);
+}
+.sesta-finca__head {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.sesta-finca__title { display: flex; flex-direction: column; gap: 24px; }
+.sesta-finca__display {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 13ch;
+}
+.sesta-finca__copy { display: flex; flex-direction: column; gap: 24px; padding-top: 8px; }
+.sesta-finca__body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--color-text);
+  max-width: 46ch;
+}
+.sesta-finca__photos {
+  max-width: var(--max);
+  margin: clamp(56px, 8vh, 104px) auto 0;
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  gap: clamp(24px, 3vw, 56px);
+  align-items: start;
+}
+.sesta-finca__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+.sesta-finca__photo--sm { aspect-ratio: 1 / 1; max-width: 280px; }
+.sesta-finca__photo img { object-fit: cover; }
+
+@media (max-width: 900px) {
+  .sesta-finca__head { grid-template-columns: 1fr; gap: 24px; }
+  .sesta-finca__photos { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   IMAGE STRIP — 3 staggered photos
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-strip {
+  background: var(--color-bg);
+  padding: clamp(48px, 8vh, 96px) clamp(20px, 4vw, 80px);
+}
+.sesta-strip__grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-rows: auto auto;
+  gap: clamp(40px, 6vw, 96px) clamp(24px, 3vw, 56px);
+  align-items: start;
+}
+.sesta-strip__cell {
+  position: relative;
+  width: 100%;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+.sesta-strip__cell img { object-fit: cover; }
+.sesta-strip__cell--1 { aspect-ratio: 1 / 1; max-width: 220px; }
+.sesta-strip__cell--2 { aspect-ratio: 16 / 11; }
+.sesta-strip__cell--3 { aspect-ratio: 1 / 1; max-width: 320px; margin-top: clamp(16px, 4vh, 64px); }
+
+@media (max-width: 900px) {
+  .sesta-strip__grid { grid-template-columns: 1fr; }
+  .sesta-strip__cell--1, .sesta-strip__cell--3 { max-width: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   QUOTE — italic pull quote, right-aligned, cream surface
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-quote {
+  background: var(--color-bg);
+  padding: clamp(48px, 8vh, 96px) clamp(20px, 4vw, 80px) clamp(72px, 12vh, 144px);
+}
+.sesta-quote__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+}
+.sesta-quote__body {
+  grid-column: 2;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+  max-width: 32ch;
+}
+.sesta-quote__attribution {
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-style: normal;
+}
+.sesta-quote__attribution .name { display: block; color: var(--color-text); margin-bottom: 4px; }
+
+@media (max-width: 900px) {
+  .sesta-quote__inner { grid-template-columns: 1fr; }
+  .sesta-quote__body { grid-column: 1; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DISCOVER WINES — big italic link banner between sections
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-discover {
+  background: var(--color-bg);
+  padding: clamp(64px, 10vh, 120px) clamp(20px, 4vw, 80px);
+  text-align: right;
+}
+.sesta-discover__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.sesta-discover__link {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1.5px;
+  transition: text-underline-offset 0.25s ease;
+  display: inline-block;
+}
+.sesta-discover__link:hover { text-underline-offset: 12px; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   WINE LINES — 2 columns "01 / 02 The Terroir Line" with bottle
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-wines {
+  background: var(--color-bg);
+  padding: clamp(72px, 12vh, 140px) clamp(20px, 4vw, 80px);
+}
+.sesta-wines__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  position: relative;
+}
+.sesta-wines__inner::before {
+  content: '';
+  position: absolute;
+  top: 24px; bottom: 24px; left: 50%;
+  width: 1px;
+  background: var(--color-border-strong);
+}
+.sesta-wines__col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-right: clamp(20px, 3vw, 48px);
+}
+.sesta-wines__col + .sesta-wines__col { padding-right: 0; padding-left: clamp(20px, 3vw, 48px); }
+.sesta-wines__count {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sesta-wines__count .num { font-style: normal; font-weight: 300; }
+.sesta-wines__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sesta-wines__title .roman { font-style: normal; }
+.sesta-wines__body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.65;
+  max-width: 42ch;
+}
+.sesta-wines__bottle {
+  position: relative;
+  margin-top: 24px;
+  height: 220px;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0.45;
+}
+.sesta-wines__bottle img { max-height: 100%; width: auto; filter: drop-shadow(0 12px 32px rgba(24,22,19,0.25)); }
+.sesta-wines__pager { display: flex; gap: 6px; margin-top: 16px; }
+.sesta-wines__pager span {
+  width: 24px; height: 1px;
+  background: var(--color-border-strong);
+  opacity: 0.45;
+}
+.sesta-wines__pager span.is-active { opacity: 1; }
+
+@media (max-width: 900px) {
+  .sesta-wines__inner { grid-template-columns: 1fr; gap: 56px; }
+  .sesta-wines__inner::before { display: none; }
+  .sesta-wines__col, .sesta-wines__col + .sesta-wines__col { padding: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   TERROIR — full-bleed photo + italic display + body + button
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-terroir {
+  position: relative;
+  width: 100%;
+  min-height: 580px;
+  color: var(--color-on-photo);
+  overflow: hidden;
+}
+.sesta-terroir .sesta-eyebrow { color: var(--color-on-photo); opacity: 0.85; }
+.sesta-terroir__bg {
+  position: absolute;
+  top: -15%; left: 0; right: 0; bottom: -15%;
+  z-index: 1;
+}
+.sesta-terroir__bg img { object-fit: cover; }
+.sesta-terroir__veil {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.15) 100%);
+}
+.sesta-terroir__inner {
+  position: relative; z-index: 3;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 80px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: end;
+}
+.sesta-terroir__title { display: flex; flex-direction: column; gap: 28px; }
+.sesta-terroir__display {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--color-on-photo);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35);
+  margin: 0;
+  max-width: 12ch;
+}
+.sesta-terroir__copy { display: flex; flex-direction: column; gap: 24px; padding-bottom: 16px; }
+.sesta-terroir__body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-on-photo);
+  max-width: 42ch;
+}
+.sesta-terroir__btn {
+  background: transparent;
+  color: var(--color-on-photo);
+  border-color: var(--color-on-photo);
+  align-self: flex-start;
+}
+.sesta-terroir__btn:hover { background: var(--color-on-photo); color: var(--color-text); }
+
+@media (max-width: 900px) {
+  .sesta-terroir__inner { grid-template-columns: 1fr; align-items: start; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BODEGA — split text + photo
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-bodega {
+  background: var(--color-bg);
+  padding: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 80px);
+}
+.sesta-bodega__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.sesta-bodega__text { display: flex; flex-direction: column; gap: 28px; }
+.sesta-bodega__display {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 12ch;
+}
+.sesta-bodega__body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15.5px;
+  line-height: 1.65;
+  max-width: 46ch;
+}
+.sesta-bodega__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+.sesta-bodega__photo img { object-fit: cover; }
+
+@media (max-width: 900px) { .sesta-bodega__inner { grid-template-columns: 1fr; } }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   WINEMAKER QUOTE — left photo + italic pull quote right
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-wm-quote {
+  background: var(--color-bg);
+  padding: clamp(64px, 10vh, 120px) clamp(20px, 4vw, 80px);
+}
+.sesta-wm-quote__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.sesta-wm-quote__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+.sesta-wm-quote__photo img { object-fit: cover; }
+.sesta-wm-quote__body {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  max-width: 32ch;
+  color: var(--color-text);
+}
+
+@media (max-width: 900px) { .sesta-wm-quote__inner { grid-template-columns: 1fr; } }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   NEWSLETTER — dusty olive-brown surface
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-newsletter {
+  background: var(--color-bg-warm);
+  color: var(--color-text);
+  padding: clamp(64px, 10vh, 112px) clamp(20px, 4vw, 80px);
+}
+.sesta-newsletter__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.sesta-newsletter__display {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sesta-newsletter__display .roman { font-style: normal; }
+.sesta-newsletter__right { display: flex; flex-direction: column; gap: 28px; }
+.sesta-newsletter__body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.65;
+  max-width: 38ch;
+  color: var(--color-text);
+}
+.sesta-newsletter__form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+}
+.sesta-newsletter__input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-text);
+  padding: 8px 0;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--color-text);
+  outline: none;
+}
+.sesta-newsletter__input::placeholder { color: var(--color-text-muted); opacity: 0.85; }
+.sesta-newsletter__submit {
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-btn);
+  padding: 10px 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sesta-newsletter__submit:hover { background: var(--color-text); color: var(--color-bg-warm); }
+
+@media (max-width: 900px) { .sesta-newsletter__inner { grid-template-columns: 1fr; } }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FOOTER — links + contact + socials + monogram
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-footer {
+  background: var(--color-bg-warm);
+  color: var(--color-text);
+  padding: clamp(40px, 6vh, 64px) clamp(20px, 4vw, 80px);
+  border-top: 1px solid rgba(24, 22, 19, 0.14);
+}
+.sesta-footer__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: clamp(24px, 3vw, 56px);
+  align-items: start;
+}
+.sesta-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+}
+.sesta-footer__col a { color: inherit; text-decoration: none; opacity: 0.85; }
+.sesta-footer__col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.sesta-footer__heading {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sesta-footer__socials { display: flex; gap: 10px; margin-top: 8px; }
+.sesta-footer__socials a {
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+}
+.sesta-footer__mono {
+  width: 56px; height: 56px;
+  border: 1px solid var(--color-text);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  align-self: end;
+}
+.sesta-footer__copyright {
+  grid-column: 1 / -1;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 24px;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .sesta-footer__inner { grid-template-columns: 1fr 1fr; }
+  .sesta-footer__mono { grid-column: 2; justify-self: end; }
+}
+
+/* page — Sesta has one continuous warm background */
+.page, [data-main] { background: var(--color-bg); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   MOTION HERO — Kettmeir-style pinned scroll-scrubbed canvas hero
+   ───────────────────────────────────────────────────────────────────────── */
+.motion-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+.motion-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.motion-hero__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+.motion-hero__copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: clamp(110px, 16vh, 180px) clamp(28px, 5vw, 80px) 0;
+  pointer-events: none;
+}
+.motion-hero__title {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(72px, 12vw, 240px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  text-transform: uppercase;
+  margin: 0;
+}
+.motion-hero__title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* keep descenders visible inside the mask */
+}
+.motion-hero__title .line > span {
+  display: inline-block;
+  will-change: transform;
+}
+.motion-hero__sub {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 48px);
+  line-height: 1.1;
+  color: var(--color-text);
+  opacity: 0;
+  margin: clamp(24px, 3vh, 48px) 0 0;
+  max-width: 18ch;
+}
+.motion-hero__sub em {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+.motion-hero__arrow {
+  position: absolute;
+  right: clamp(24px, 4vw, 72px);
+  bottom: clamp(40px, 8vh, 96px);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  background: transparent;
+  z-index: 3;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.motion-hero__arrow:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+@media (max-width: 768px) {
+  .motion-hero__title { font-size: clamp(56px, 14vw, 96px); }
+  .motion-hero__copy { padding-top: clamp(96px, 14vh, 140px); }
+}

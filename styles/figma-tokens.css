@@ -1,0 +1,67 @@
+/* ──────────────────────────────────────────────────────────────────────────
+ * Atelier archetype — design tokens (Sesta Laioles reference)
+ *
+ * Mood: refined, heritage Mediterranean, monochrome-with-photography.
+ * Background is a single warm cream that runs through every text section.
+ * Photos do all the color work. No bright accent.
+ *
+ * Defaults below are extracted from sestalaioles.com.
+ * Replace per-project — but keep the warm-cream identity intact; if the
+ * lead's brand calls for a different surface tone, swap the cream value
+ * only, not the structure.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Brand colors — KETTMEIR CLONE (cream + deep navy) ──────────────── */
+
+  /* Page surface — Kettmeir cream. The dominant color. */
+  --color-bg: #EBE5D8;
+  --color-bg-alt: #DDD5C4;       /* slightly deeper cream for section rhythm */
+  --color-bg-dark: #1A2B5F;      /* navy used as "dark" foil when needed */
+
+  /* Heavy footer surface — same navy, used once at the bottom for contrast. */
+  --color-bg-warm: #1A2B5F;
+
+  /* Ink */
+  --color-text: #1A2B5F;          /* deep navy — the headline + body color */
+  --color-text-light: #EBE5D8;    /* cream text on navy surfaces */
+  --color-text-muted: #6F7BA0;    /* faded navy — second-line italic, captions */
+  --color-on-photo: #FFFFFF;      /* pure white — for text overlaid on photos */
+
+  /* Accents — navy is the single accent (dots, links, button outlines). */
+  --color-primary: #1A2B5F;
+  --color-primary-dark: #0F1A3D;
+  --color-accent: #1A2B5F;        /* navy dot in Kettmeir hero — same color */
+  --color-accent-dark: #0F1A3D;
+
+  /* Borders */
+  --color-border: rgba(24, 22, 19, 0.14);
+  --color-border-strong: rgba(24, 22, 19, 0.32);
+  --color-border-light: rgba(245, 239, 223, 0.20);
+
+  /* ── Typography ──────────────────────────────────────────────────────── */
+  --font-heading: var(--font-cormorant);   /* italic + roman for display moments */
+  --font-body: var(--font-inter);           /* sans for body / nav / buttons */
+
+  --tracking-heading: -0.015em;
+  --tracking-display: -0.02em;
+  --tracking-caps: 0.18em;
+
+  /* ── Spacing ─────────────────────────────────────────────────────────── */
+  --space-section: 140px;
+  --space-section-sm: 88px;
+  --space-section-xs: 48px;
+  --gutter: clamp(20px, 4vw, 64px);
+  --max: 1320px;
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  /* Sesta buttons are pill-shaped. Cards are clean rectangles with no radius. */
+  --radius-card: 0;
+  --radius-btn: 999px;
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+  --duration-default: 0.6s;
+  --duration-slow: 1s;
+}
