@@ -26,8 +26,20 @@ test.describe('Motion hero — Veo sequence pipeline', () => {
     await expect(canvas).toHaveAttribute('aria-hidden', 'true')
 
     const h1 = section.locator('h1.motion-hero__title')
-    await expect(h1).toContainText(/Progressio/i)
-    await expect(h1).toContainText(/traditione/i)
+    await expect(h1).toContainText(/Sesta/i)
+    await expect(h1).toContainText(/Mallorca/i)
+
+    // 3-column copy is in the DOM as real text (not painted onto canvas)
+    const cols = section.locator('.motion-hero__columns .motion-hero__col')
+    await expect(cols).toHaveCount(3)
+
+    // Dark overlay + grain layers exist for the moody look
+    await expect(section.locator('.motion-hero__veil')).toBeAttached()
+    await expect(section.locator('.motion-hero__grain')).toBeAttached()
+
+    // Corner labels render
+    await expect(section.locator('.motion-hero__corner--tl')).toContainText(/Est/i)
+    await expect(section.locator('.motion-hero__corner--tr')).toContainText(/Mallorca/i)
   })
 
   test('frame sequence serves desktop_00001 through desktop_00090', async ({ page, baseURL }) => {

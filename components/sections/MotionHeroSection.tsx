@@ -28,7 +28,7 @@ const MOBILE_PATH = DESKTOP_PATH
 export default function MotionHeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const subRef = useRef<HTMLParagraphElement | null>(null)
+  const subRef = useRef<HTMLDivElement | null>(null)
   const [loadPct, setLoadPct] = useState(0)
   const [ready, setReady] = useState(false)
 
@@ -186,6 +186,8 @@ export default function MotionHeroSection() {
   return (
     <section className="motion-hero" id="hero" ref={sectionRef}>
       <canvas className="motion-hero__canvas" ref={canvasRef} aria-hidden="true" />
+      <div className="motion-hero__veil" aria-hidden="true" />
+      <div className="motion-hero__grain" aria-hidden="true" />
 
       {!ready && (
         <div className="motion-hero__loader" aria-hidden="true">
@@ -193,16 +195,34 @@ export default function MotionHeroSection() {
         </div>
       )}
 
+      <div className="motion-hero__corner motion-hero__corner--tl" aria-hidden="true">
+        Est
+      </div>
+      <div className="motion-hero__corner motion-hero__corner--tr" aria-hidden="true">
+        Mallorca
+      </div>
+
       <div className="motion-hero__copy">
         <h1 className="motion-hero__title">
-          <span className="line"><span>Progressio</span></span>
-          <span className="line"><span>in traditione</span></span>
+          <span className="line"><span>Sesta</span></span>
+          <span className="line"><span>Ses Talaioles</span></span>
+          <span className="line"><span>Mallorca</span></span>
         </h1>
-        <p className="motion-hero__sub" ref={subRef}>
-          <span>With our wines, </span>
-          <em>we tell</em>
-          <span> all of it.</span>
-        </p>
+
+        <div className="motion-hero__columns" ref={subRef}>
+          <p className="motion-hero__col">
+            A Mallorcan finca where natural wine grows on limestone soil under
+            the Tramuntana mountains.
+          </p>
+          <p className="motion-hero__col">
+            Four wines, four expressions of place. Grenache, Callet, Manto
+            Negro, and a coastal white.
+          </p>
+          <p className="motion-hero__col">
+            Visit the bodega from May to October by appointment. The tasting
+            room overlooks the sea.
+          </p>
+        </div>
       </div>
 
       <a href="#finca" className="motion-hero__arrow" aria-label="Scroll to next section">↓</a>
