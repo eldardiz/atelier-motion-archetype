@@ -12,32 +12,38 @@
  * ────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Brand colors — KETTMEIR CLONE (cream + deep navy) ──────────────── */
+  /* ── Brand colors — cream + deep forest green (atelier-motion v4) ──── */
 
-  /* Page surface — Kettmeir cream. The dominant color. */
+  /* Page surface — warm light cream. The dominant color. */
   --color-bg: #EBE5D8;
   --color-bg-alt: #DDD5C4;       /* slightly deeper cream for section rhythm */
-  --color-bg-dark: #1A2B5F;      /* navy used as "dark" foil when needed */
+  --color-bg-cream: #F5F0E1;     /* lightest creamy off-white — replaces pure #FFF */
 
-  /* Heavy footer surface — same navy, used once at the bottom for contrast. */
-  --color-bg-warm: #1A2B5F;
+  /* Alternate brand surface — deep forest green. Used on every other section
+     for a cream → forest → cream rhythm. Also the navbar overlay color. */
+  --color-bg-dark: #1F3A2D;
+  --color-bg-dark-2: #18302A;    /* a touch deeper for nested dark layers */
+
+  /* Heavy footer surface — same forest, used at the bottom for contrast. */
+  --color-bg-warm: #1F3A2D;
 
   /* Ink */
-  --color-text: #1A2B5F;          /* deep navy — the headline + body color */
-  --color-text-light: #EBE5D8;    /* cream text on navy surfaces */
-  --color-text-muted: #6F7BA0;    /* faded navy — second-line italic, captions */
+  --color-text: #1F3A2D;          /* deep forest — the headline + body color on cream */
+  --color-text-light: #F5F0E1;    /* cream text on dark forest surfaces */
+  --color-text-muted: #6E7568;    /* faded forest — captions, eyebrows on cream */
+  --color-text-muted-light: rgba(245, 240, 225, 0.7); /* faded cream on dark */
   --color-on-photo: #FFFFFF;      /* pure white — for text overlaid on photos */
 
-  /* Accents — navy is the single accent (dots, links, button outlines). */
-  --color-primary: #1A2B5F;
-  --color-primary-dark: #0F1A3D;
-  --color-accent: #1A2B5F;        /* navy dot in Kettmeir hero — same color */
-  --color-accent-dark: #0F1A3D;
+  /* Accents — forest is the single accent. */
+  --color-primary: #1F3A2D;
+  --color-primary-dark: #142621;
+  --color-accent: #1F3A2D;
+  --color-accent-dark: #142621;
 
   /* Borders */
-  --color-border: rgba(24, 22, 19, 0.14);
-  --color-border-strong: rgba(24, 22, 19, 0.32);
-  --color-border-light: rgba(245, 239, 223, 0.20);
+  --color-border: rgba(31, 58, 45, 0.14);
+  --color-border-strong: rgba(31, 58, 45, 0.32);
+  --color-border-light: rgba(245, 240, 225, 0.20);
 
   /* ── Typography ──────────────────────────────────────────────────────── */
   --font-heading: var(--font-cormorant);   /* italic + roman for display moments */
