@@ -1,0 +1,5 @@
+# Source MP4s stay local — they're 30-100MB each, too big for git.
+# Generated WebP frames in public/sequence/ are the committed artifact.
+*.mp4
+*.mov
+*.webm

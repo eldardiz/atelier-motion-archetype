@@ -16,12 +16,14 @@ import { useEffect, useRef, useState } from 'react'
  * Real <h1> stays in the DOM for SEO/a11y; <canvas> is aria-hidden.
  */
 
-const DESKTOP_FRAMES = 94
-const MOBILE_FRAMES = 118
+const DESKTOP_FRAMES = 90
+// No dedicated mobile sequence yet — fall back to desktop frames on mobile.
+// When the 9:16 take is generated, set MOBILE_FRAMES to its count and switch
+// to MOBILE_PATH below.
+const MOBILE_FRAMES = 90
 const DESKTOP_PATH = (i: number) =>
-  `/sequence/desktop/kett_desktop_${String(i + 1).padStart(5, '0')}.webp`
-const MOBILE_PATH = (i: number) =>
-  `/sequence/mobile/kett_mobile_${String(i + 1).padStart(5, '0')}.webp`
+  `/sequence/desktop/desktop_${String(i + 1).padStart(5, '0')}.webp`
+const MOBILE_PATH = DESKTOP_PATH
 
 export default function MotionHeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null)

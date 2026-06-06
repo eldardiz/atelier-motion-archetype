@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' next dev",
-    "prebuild": "bash scripts/fetch-kettmeir-frames.sh",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

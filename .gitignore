@@ -16,6 +16,11 @@ next-env.d.ts
 /test-results/
 /playwright/.cache/
 
-# Kettmeir's image sequence — DEV ONLY, copyright Kettmeir, never commit.
-# Re-generate locally via `bash scripts/fetch-kettmeir-frames.sh`.
-/public/sequence/
+# Source MP4s + stills used to generate the motion-hero sequence stay local.
+# Generated frames in public/sequence/ are the committed artifact.
+/scripts/source/*.mp4
+/scripts/source/*.mov
+/scripts/source/*.webm
+/scripts/source/*.jpg
+/scripts/source/*.jpeg
+/scripts/source/*.png

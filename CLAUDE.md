@@ -12,17 +12,22 @@ The original `atelier/` archetype (paper-white + forest green, quiet/photographi
 - **Navbar**: `mix-blend-mode: difference` on the logo so it auto-inverts across light/dark frames
 - **Below-fold sections**: carry over from atelier/ with a palette swap pass. Non-blocking for the demo URL.
 
-## ⚠️ Asset legal note — READ BEFORE COMMIT
+## Sequence assets — owned, AI-generated
 
-The `public/sequence/` folder contains **Kettmeir's actual WebP frames**, downloaded via `scripts/fetch-kettmeir-frames.sh` for **internal development only**. These frames belong to Kettmeir and **MUST NOT** be:
+The `public/sequence/desktop/` folder ships **90 WebP frames** of our own
+motion-hero animation, committed to git. The pipeline:
 
-- Pushed to GitHub (folder is in `.gitignore`)
-- Used on any client delivery, custom domain, or production marketing URL
-- Distributed beyond the `*.vercel.app` private staging URL
+1. Image-gen model produced a still composition (`scripts/source/atelier-motion-still.jpg`, gitignored)
+2. **Google Veo 3 / Veo 3.1** turned the still into a 6-second video via image-to-video mode
+3. `scripts/encode-sequence.sh` extracts 90 frames at 15fps, 1440px wide, WebP q75 (~19KB each)
 
-**Before any client work or public push**: replace with our own renders (Blender / Cinema 4D drone or 3D sequence, ~60-90 WebP frames at 1440px wide).
+Locked creative brief: `scripts/asset-prompt.md`. License + regeneration
+instructions: `public/sequence/README.md`.
 
-The fetch script is run once locally and the frames live outside of git.
+To regenerate after a creative re-roll: drop a new
+`scripts/source/atelier-motion-desktop.mp4` (gitignored) and run
+`bash scripts/encode-sequence.sh`. If the frame count changes, update
+`DESKTOP_FRAMES` in `components/sections/MotionHeroSection.tsx`.
 
 ## Stack
 
@@ -50,8 +55,7 @@ The `<canvas>` is `aria-hidden="true"`; the real `<h1>` headline lives in the DO
 
 - **Pin jump on font load**: call `ScrollTrigger.refresh()` after fonts swap (use `document.fonts.ready` Promise inside the hero `useEffect`)
 - **Lenis + ScrollTrigger drift**: `lenis.on('scroll', ScrollTrigger.update)` + `gsap.ticker.add((t) => lenis.raf(t * 1000))` — without this, the canvas scrub stutters
-- **Mobile sequence weight**: 3.5MB total — `<link rel="preload" as="image">` the first frame to avoid blank first paint
-- **Asset hotlinking**: never reference `kettmeir.com` URLs at runtime. Load from `public/sequence/` always.
+- **Mobile sequence**: no dedicated 9:16 take yet; mobile viewports fall back to the desktop frames (acceptable, ~1.7MB). When a real mobile sequence ships, drop it into `public/sequence/mobile/` and switch `MOBILE_PATH` in `MotionHeroSection.tsx`.
 - All other pitfalls from `atelier/` (Lenis dynamic import, em-dash rule, Tailwind in dependencies) carry over.
 
 ## Git rules
