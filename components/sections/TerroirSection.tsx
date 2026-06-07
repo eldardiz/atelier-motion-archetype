@@ -69,20 +69,20 @@ export default function TerroirSection() {
 
       <div className="sesta-terroir__inner">
         <div className="sesta-terroir__title">
-          <p className="sesta-eyebrow" style={{ color: 'var(--color-bg)' }}>
+          <p className="sesta-eyebrow" style={{ color: 'var(--color-bg)' }} data-reveal>
             The Terroir
           </p>
-          <h2 className="sesta-terroir__display">
+          <h2 className="sesta-terroir__display" data-words-pullup>
             In harmony<br />with nature
           </h2>
         </div>
         <div className="sesta-terroir__copy">
-          <p className="sesta-terroir__body">
+          <p className="sesta-terroir__body" data-reveal>
             It took courage to plant the vines facing the sea in the jumbled foothills of the
             Llevant mountains, a rather unusual planting practice, at least in this part of
             Mallorca, and a feature unique to Ses Talaioles.
           </p>
-          <a href="#bodega" className="sesta-btn sesta-terroir__btn">
+          <a href="#bodega" className="sesta-btn sesta-terroir__btn" data-reveal>
             Discover more
           </a>
         </div>

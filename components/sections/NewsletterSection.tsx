@@ -17,17 +17,17 @@ export default function NewsletterSection() {
   return (
     <section className="sesta-newsletter" id="contact">
       <div className="sesta-newsletter__inner">
-        <h2 className="sesta-newsletter__display">
+        <h2 className="sesta-newsletter__display" data-words-pullup>
           <em>Subscribe to</em><br />
           <em>our</em> <span className="roman">newsletter</span>
         </h2>
 
         <div className="sesta-newsletter__right">
-          <p className="sesta-newsletter__body">
+          <p className="sesta-newsletter__body" data-reveal>
             By subscribing to the newsletter, you will always be up to date. Find out about new
             products, events, and specials.
           </p>
-          <form onSubmit={handleSubmit} className="sesta-newsletter__form">
+          <form onSubmit={handleSubmit} className="sesta-newsletter__form" data-reveal>
             <input
               className="sesta-newsletter__input"
               type="email"

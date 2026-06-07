@@ -32,19 +32,19 @@ const LINES: WineLine[] = [
 export default function WineLinesSection() {
   return (
     <section className="sesta-wines" id="wines">
-      <div className="sesta-wines__inner">
+      <div className="sesta-wines__inner" data-card-stagger>
         {LINES.map((line) => (
-          <div key={line.id} className="sesta-wines__col">
+          <div key={line.id} className="sesta-wines__col" data-card>
             <p className="sesta-eyebrow">The wines</p>
             <h3 className="sesta-wines__count">
               <span className="num">{line.count.split('/')[0].trim()}</span>
               {' / '}
               <span className="num">{line.count.split('/')[1].trim()}</span>
             </h3>
-            <h2 className="sesta-wines__title">
+            <h2 className="sesta-wines__title" data-words-pullup>
               {line.name.italic} <span className="roman">{line.name.roman}</span>
             </h2>
-            <p className="sesta-wines__body">{line.body}</p>
+            <p className="sesta-wines__body" data-anim-para>{line.body}</p>
 
             <div className="sesta-wines__pager">
               {Array.from({ length: line.paging.total }).map((_, i) => (

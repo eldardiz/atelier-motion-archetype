@@ -5,7 +5,7 @@ export default function DiscoverWinesSection() {
   return (
     <section className="sesta-discover">
       <div className="sesta-discover__inner">
-        <a href="#wines" className="sesta-discover__link">
+        <a href="#wines" className="sesta-discover__link" data-words-pullup>
           Discover our wines
         </a>
       </div>

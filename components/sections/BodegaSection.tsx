@@ -6,19 +6,19 @@ import { PHOTOS } from '@/lib/placeholders'
 
 export default function BodegaSection() {
   return (
-    <section className="sesta-bodega" id="bodega">
+    <section className="sesta-bodega" id="bodega" data-parallax-trigger>
       <div className="sesta-bodega__inner">
         <div className="sesta-bodega__text">
-          <p className="sesta-eyebrow">The Bodega</p>
-          <h2 className="sesta-bodega__display">
+          <p className="sesta-eyebrow" data-reveal>The Bodega</p>
+          <h2 className="sesta-bodega__display" data-words-pullup>
             Tradition meets<br />innovation
           </h2>
-          <p className="sesta-bodega__body">
+          <p className="sesta-bodega__body" data-anim-para>
             The development of the grapes&apos; very own aroma is of utmost importance at Ses
             Talaioles. Precise craftsmanship and the latest innovative techniques produce the
             highest quality.
           </p>
-          <a href="#contact" className="sesta-btn" style={{ alignSelf: 'flex-start' }}>
+          <a href="#contact" className="sesta-btn" style={{ alignSelf: 'flex-start' }} data-reveal>
             Discover more
           </a>
         </div>
@@ -29,6 +29,7 @@ export default function BodegaSection() {
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
             className="object-cover"
+            data-parallax="0.18"
           />
         </div>
       </div>

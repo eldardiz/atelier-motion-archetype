@@ -1000,3 +1000,269 @@ input, textarea { font: inherit; color: inherit; }
   .motion-hero__title { font-size: clamp(48px, 13vw, 92px); }
   .motion-hero__copy { padding-top: clamp(84px, 12vh, 120px); }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PLAYLIST — "On the bodega speakers" (vinyl + tracklist, forest section)
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-playlist {
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
+  padding: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 80px);
+  overflow: hidden;
+}
+.sesta-playlist__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.sesta-playlist__copy { display: flex; flex-direction: column; gap: 24px; }
+.sesta-playlist .sesta-eyebrow {
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+.sesta-playlist__display {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--color-text-light);
+  margin: 0;
+  max-width: 14ch;
+}
+.sesta-playlist__body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-muted-light);
+  max-width: 42ch;
+}
+.sesta-playlist__tracks {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(245, 240, 225, 0.18);
+}
+.sesta-playlist__track {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: baseline;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(245, 240, 225, 0.12);
+}
+.sesta-playlist__track .num {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.sesta-playlist__track .meta { display: flex; flex-direction: column; gap: 4px; }
+.sesta-playlist__track .artist {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-text-light);
+}
+.sesta-playlist__track .title {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted-light);
+}
+.sesta-playlist__btn {
+  align-self: flex-start;
+  margin-top: 16px;
+  color: var(--color-text-light);
+  border-color: var(--color-text-light);
+}
+.sesta-playlist__btn:hover { background: var(--color-text-light); color: var(--color-bg-dark); }
+
+.sesta-playlist__visual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.playlist-vinyl {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 1 / 1;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
+  will-change: transform;
+}
+.playlist-vinyl svg { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 900px) {
+  .sesta-playlist__inner { grid-template-columns: 1fr; gap: 56px; }
+  .sesta-playlist__visual { max-width: 360px; margin: 0 auto; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   TESTIMONIALS — Cascaid card-collage (Polaroid spread + active overlay)
+   ───────────────────────────────────────────────────────────────────────── */
+.sesta-testi {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: clamp(96px, 14vh, 160px) clamp(20px, 4vw, 80px) clamp(120px, 16vh, 180px);
+  overflow: hidden;
+}
+.sesta-testi__head {
+  max-width: var(--max);
+  margin: 0 auto clamp(56px, 8vh, 96px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+.sesta-testi__display {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0;
+  max-width: 18ch;
+}
+.sesta-testi__sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  max-width: 44ch;
+}
+
+.sesta-testi__deck {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1vw, 18px);
+  max-width: 1400px;
+  position: relative;
+  min-height: 540px;
+}
+.sesta-testi__card {
+  position: relative;
+  width: clamp(140px, 14vw, 200px);
+  aspect-ratio: 3 / 4;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transform: rotate(var(--tilt)) translateY(0) scale(0.96);
+  opacity: 0.85;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease,
+    box-shadow 0.5s ease,
+    width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+.sesta-testi__card:hover { transform: rotate(var(--tilt)) translateY(-8px) scale(0.98); }
+.sesta-testi__card.is-active {
+  width: clamp(280px, 26vw, 380px);
+  transform: rotate(0deg) translateY(-12px) scale(1);
+  opacity: 1;
+  z-index: 5;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.32);
+}
+.sesta-testi__corner {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+.sesta-testi__active-pane {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px 22px 24px;
+  background: linear-gradient(180deg, rgba(8, 12, 10, 0) 38%, rgba(8, 12, 10, 0.85) 100%);
+  color: #FFFFFF;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease 0.15s;
+}
+.sesta-testi__card.is-active .sesta-testi__active-pane { opacity: 1; }
+.sesta-testi__active-pane .goals {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  color: #FFFFFF;
+}
+.sesta-testi__active-pane .goals span { font-style: normal; font-size: 18px; opacity: 0.6; margin-left: 4px; }
+.sesta-testi__active-pane .quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.45;
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 30ch;
+}
+.sesta-testi__active-pane .label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 8px 0 4px;
+}
+.sesta-testi__active-pane .caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  margin: 0;
+  color: #FFFFFF;
+}
+.sesta-testi__active-pane ul { list-style: none; margin: 0; padding: 0; }
+.sesta-testi__active-pane li {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  padding-left: 12px;
+  position: relative;
+}
+.sesta-testi__active-pane li::before { content: "·"; position: absolute; left: 2px; color: rgba(255, 255, 255, 0.6); }
+
+@media (max-width: 900px) {
+  .sesta-testi__deck { flex-wrap: wrap; gap: 16px; min-height: auto; }
+  .sesta-testi__card {
+    width: 44%;
+    transform: rotate(var(--tilt)) translateY(0) scale(1);
+  }
+  .sesta-testi__card.is-active { width: 92%; order: -1; }
+}

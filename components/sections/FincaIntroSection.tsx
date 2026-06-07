@@ -10,27 +10,27 @@ export default function FincaIntroSection() {
     <section className="sesta-finca" id="finca">
       <div className="sesta-finca__head">
         <div className="sesta-finca__title">
-          <p className="sesta-eyebrow">The Finca</p>
-          <h2 className="sesta-finca__display">
+          <p className="sesta-eyebrow" data-reveal>The Finca</p>
+          <h2 className="sesta-finca__display" data-words-pullup>
             Reinventing a<br />historical place
           </h2>
         </div>
         <div className="sesta-finca__copy">
-          <p className="sesta-finca__body">
+          <p className="sesta-finca__body" data-anim-para>
             In the east of the island, in close proximity to the Mediterranean Sea, lies the finca,
             full of traditions, full of history. A magical place that is reflected in the taste of
             its wines.
           </p>
-          <a href="#wines" className="sesta-btn">Discover more</a>
+          <a href="#wines" className="sesta-btn" data-reveal>Discover more</a>
         </div>
       </div>
 
-      <div className="sesta-finca__photos">
+      <div className="sesta-finca__photos" data-parallax-trigger>
         <div className="sesta-finca__photo sesta-finca__photo--sm" aria-hidden="true">
-          <Image src={PHOTOS.fincaSm} alt="" fill sizes="280px" className="object-cover" />
+          <Image src={PHOTOS.fincaSm} alt="" fill sizes="280px" className="object-cover" data-parallax="0.12" />
         </div>
         <div className="sesta-finca__photo" aria-hidden="true">
-          <Image src={PHOTOS.fincaWide} alt="" fill sizes="(max-width: 900px) 100vw, 60vw" className="object-cover" />
+          <Image src={PHOTOS.fincaWide} alt="" fill sizes="(max-width: 900px) 100vw, 60vw" className="object-cover" data-parallax="0.18" />
         </div>
       </div>
     </section>
